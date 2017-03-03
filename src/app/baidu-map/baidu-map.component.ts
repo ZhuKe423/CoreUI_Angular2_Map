@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {BaiduMap, OfflineOptions, ControlAnchor, NavigationControlType} from 'angular2-baidu-map';
 import { PointService } from './point-service';
 import { Point } from './point';
+import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
   selector: 'app-baidu-map',
@@ -15,12 +16,16 @@ import { Point } from './point';
         }
     `],
 })
+
 export class BaiduMapComponent implements OnInit {
 
   constructor(
       private pointService: PointService,
+      private ref: ChangeDetectorRef,
       private router: Router
-  ) {}
+  ) {
+
+  }
 
   opts:any;
   offlineOpts:OfflineOptions;
@@ -59,10 +64,15 @@ export class BaiduMapComponent implements OnInit {
       }
     };
 
+    console.log('Makers: ', this.opts.markers);
+
     this.offlineOpts = {
       retryInterval: 5000,
       txt: '没有网络'
     };
+
+    /*this.selectedPoint = this.pointService.getPoint(1);*/
+
   }
 
   // 刚加载加载地图信息
@@ -71,10 +81,28 @@ export class BaiduMapComponent implements OnInit {
   }
 
   // 单机地图坐标, 打印信息
-  clickMarker(marker:any) {
-    console.log(marker);
-    //selectedPoint = point;
+  clickMarker(marker: any){
+    for (var i = 0 ; i < this.points.length;i++)
+    {
+      if((this.points[i].latitude  == marker.point.lat) && (this.points[i].longitude  == marker.point.lng))
+      {
+        this.selectedPoint = this.points[i];
+        this.pointService.clickMarker.emit(this.selectedPoint);
+        break;
+      }
+    }
+    this.ref.markForCheck();
+    this.ref.detectChanges();
+
+    console.log('The clicked marker is', this.selectedPoint);
+
   }
+
+  /*// 单机地图坐标, 打印信息
+  clickMarker(marker: any) {
+    console.log('Clicked marker\'s title is: ', marker.title);
+    this.selectedPoint = this.points[1];
+  }*/
 
   getMarks(){
     //this.pointService.getPoints().then(points => this.points = points);
@@ -87,8 +115,8 @@ export class BaiduMapComponent implements OnInit {
         latitude : this.points[i].latitude ,
         title : this.points[i].name,
         content: this.points[i].state,
-        autoDisplayInfoWindow : false,
-        enableMessage : false,
+        /*autoDisplayInfoWindow : false,
+        enableMessage : false,*/
       };
       marks[i] = tmp_mark;
     }
@@ -97,3 +125,5 @@ export class BaiduMapComponent implements OnInit {
   }
 
 }
+
+
