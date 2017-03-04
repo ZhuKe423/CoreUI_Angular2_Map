@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import {BaiduMap, OfflineOptions, ControlAnchor, NavigationControlType} from 'angular2-baidu-map';
-import { PointService } from './point-service';
+import { PointService} from './point-service';
 import { Point } from './point';
+import { PointDetails } from './point-details.component';
 import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
@@ -16,21 +17,19 @@ import { ChangeDetectorRef } from "@angular/core";
         }
     `],
 })
-
 export class BaiduMapComponent implements OnInit {
 
   constructor(
       private pointService: PointService,
-      private ref: ChangeDetectorRef,
-      private router: Router
-  ) {
-
-  }
+      private router: Router,
+      private ref:ChangeDetectorRef,
+  ) {}
 
   opts:any;
   offlineOpts:OfflineOptions;
   points:Point[];
   selectedPoint: Point;
+  private timer;
 
   ngOnInit() {
     var current_marks = this.getMarks();
@@ -64,15 +63,10 @@ export class BaiduMapComponent implements OnInit {
       }
     };
 
-    console.log('Makers: ', this.opts.markers);
-
     this.offlineOpts = {
       retryInterval: 5000,
       txt: '没有网络'
     };
-
-    /*this.selectedPoint = this.pointService.getPoint(1);*/
-
   }
 
   // 刚加载加载地图信息
@@ -81,42 +75,65 @@ export class BaiduMapComponent implements OnInit {
   }
 
   // 单机地图坐标, 打印信息
-  clickMarker(marker: any){
+  clickMarker(marker:any) {
+    //console.log(marker.point);
+    //this.selectedPoint = this.points[1];
+    //this.points[0].new_info = !this.points[0].new_info;
+    var current_marks = this.getMarks();
+    this.opts.markers = current_marks;
+
     for (var i = 0 ; i < this.points.length;i++)
     {
-      if((this.points[i].latitude  == marker.point.lat) && (this.points[i].longitude  == marker.point.lng))
-      {
-        this.selectedPoint = this.points[i];
-        this.pointService.clickMarker.emit(this.selectedPoint);
-        break;
-      }
+        if(this.points[i].latitude  == marker.point.lat)
+        {
+          this.selectedPoint = this.points[i];
+          break;
+        }
     }
+
     this.ref.markForCheck();
     this.ref.detectChanges();
-
-    console.log('The clicked marker is', this.selectedPoint);
-
+    console.log('baidu-map:',this.opts);
   }
-
-  /*// 单机地图坐标, 打印信息
-  clickMarker(marker: any) {
-    console.log('Clicked marker\'s title is: ', marker.title);
-    this.selectedPoint = this.points[1];
-  }*/
-
+  ngAfterViewInit()
+  {
+     this.timer = setInterval(() => {
+       this.points[0].new_info = !this.points[0].new_info;
+       console.log('clock:',this.opts);
+       this.ref.markForCheck();
+       this.ref.detectChanges();
+     },10000);
+  }
   getMarks(){
     //this.pointService.getPoints().then(points => this.points = points);
     this.points = this.pointService.getPointsSync();
+    this.selectedPoint = this.points[1];
     var marks = new Array();
     for ( var i = 0; i < this.points.length;i++)
     {
+      var iconUrl:string;
+      var iconWidth :number;
+      var iconHeigh :number;
+      if (this.points[i].new_info == true) {
+        iconUrl = 'http://api.map.baidu.com/img/markers.png';
+        iconWidth = 23;
+        iconHeigh = 25;
+      }
+      else {
+        iconUrl = 'http://api.map.baidu.com/img/markers.png';
+        iconWidth = 10;
+        iconHeigh = 23;
+      }
       var tmp_mark = {
         longitude : this.points[i].longitude ,
         latitude : this.points[i].latitude ,
         title : this.points[i].name,
         content: this.points[i].state,
-        /*autoDisplayInfoWindow : false,
-        enableMessage : false,*/
+        autoDisplayInfoWindow : false,
+        enableMessage : false,
+        icon : iconUrl,
+        width : iconWidth,
+        height : iconHeigh,
       };
       marks[i] = tmp_mark;
     }
@@ -125,5 +142,3 @@ export class BaiduMapComponent implements OnInit {
   }
 
 }
-
-

@@ -1,19 +1,9 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter} from '@angular/core';
 import { Point } from './point';
 import { POINTS } from './mock-points';
-/*
-import 'rxjs/add/operator/toPromise';
-import Promise = Q.Promise;
-*/
 
 @Injectable()
 export class PointService {
-    clickMarker: EventEmitter<Point>;
-
-    constructor(){
-        this.clickMarker = new EventEmitter();
-    }
-
     getPoints(): Promise<Point[]> {
         return Promise.resolve(POINTS);
     }

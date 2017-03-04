@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { BaiduMapComponent } from './baidu-map.component';
-import { PointDetailsComponent } from './point-details.component';
 
 const routes: Routes = [
     {
@@ -12,7 +11,6 @@ const routes: Routes = [
             title: 'MapCharts'
         }
     },
-    {path: 'detail/:id', component: PointDetailsComponent},
 ];
 
 @NgModule({
