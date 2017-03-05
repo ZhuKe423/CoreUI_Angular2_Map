@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { BaiduMapComponent } from './baidu-map.component';
+import {MapChartOne} from "./MapChartOne.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: BaiduMapComponent,
+        component: MapChartOne,
         data: {
             title: 'MapCharts'
         }
