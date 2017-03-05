@@ -1,144 +1,77 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
-import {BaiduMap, OfflineOptions, ControlAnchor, NavigationControlType} from 'angular2-baidu-map';
-import { PointService} from './point-service';
-import { Point } from './point';
-import { PointDetails } from './point-details.component';
-import { ChangeDetectorRef } from "@angular/core";
+import { Component, SimpleChange, Input, Output, EventEmitter, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+
+import { MapOptions, OfflineOptions } from './interfaces/Options';
+import { PreviousMarker } from './interfaces/PreviousMarker';
+import { MapStatus } from './enum/MapStatus';
+
+import { defaultOfflineOpts, defaultOpts } from './defaults';
+
+import { loader } from './Loader';
+import { reCenter, reZoom, redrawMarkers, createInstance } from './CoreOperations';
 
 @Component({
-  selector: 'app-baidu-map',
-  templateUrl: './baidu-map.component.html',
-  styles: [`
-        baidu-map{
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'baidu-map',
+    styles: [`
+        .offlinePanel{
             width: 100%;
-            height: 500px;
-            display: block;
+            height: 100%;
+            background-color: #E6E6E6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+        }
+    `, `
+        .offlineLabel{
+            font-size: 30px;
         }
     `],
+    template: `
+        <div class="offlinePanel">
+            <label class="offlineLabel">{{ offlineWords }}</label>
+        </div>
+    `
 })
-export class BaiduMapComponent implements OnInit {
+export class BaiduMap implements OnInit, OnChanges {
 
-  constructor(
-      private pointService: PointService,
-      private router: Router,
-      private ref:ChangeDetectorRef,
-  ) {}
+    @Input() ak: string;
+    @Input() protocol: string;
+    @Input() options: MapOptions;
+    @Input('offline') offlineOpts: OfflineOptions;
+    @Output() onMapLoaded = new EventEmitter();
+    @Output() onMarkerClicked = new EventEmitter();
 
-  opts:any;
-  offlineOpts:OfflineOptions;
-  points:Point[];
-  selectedPoint: Point;
-  private timer;
+    map: any;
+    offlineWords: string;
+    previousMarkers: PreviousMarker[] = [];
 
-  ngOnInit() {
-    var current_marks = this.getMarks();
+    constructor(private el: ElementRef) { }
 
-    // 配置地图, 参考百度地图api
-    this.opts = {
-      // 地图中心坐标
-      center: {
-        longitude:104.072276,
-        latitude: 30.663499
-      },
-      zoom: 13,
+    ngOnInit() {
+        let offlineOpts: OfflineOptions = Object.assign({}, defaultOfflineOpts, this.offlineOpts);
+        this.offlineWords = offlineOpts.txt;
+        loader(this.ak, offlineOpts, this._draw.bind(this), this.protocol);
+    }
 
-      // 地图上的坐标
-      markers: current_marks,
-      geolocationCtrl: {
-        anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_RIGHT,
-        showAddressBar:false,
-        enableAutoLocation:false
-      },
-      scaleCtrl: {
-        anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT
-      },
-      overviewCtrl: {
-        isOpen: false
-      },
-      navCtrl: {
-        type: NavigationControlType.BMAP_NAVIGATION_CONTROL_SMALL ,
-        showZoomInfo:false,
-        enableGeolocation:false,
-      }
-    };
-
-    this.offlineOpts = {
-      retryInterval: 5000,
-      txt: '没有网络'
-    };
-  }
-
-  // 刚加载加载地图信息
-  loadMap(e:any) {
-    console.log(e);
-  }
-
-  // 单机地图坐标, 打印信息
-  clickMarker(marker:any) {
-    //console.log(marker.point);
-    //this.selectedPoint = this.points[1];
-    //this.points[0].new_info = !this.points[0].new_info;
-    var current_marks = this.getMarks();
-    this.opts.markers = current_marks;
-
-    for (var i = 0 ; i < this.points.length;i++)
-    {
-        if(this.points[i].latitude  == marker.point.lat)
-        {
-          this.selectedPoint = this.points[i];
-          break;
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
+        let baiduMap = (<any>window)['baiduMap'];
+        if (!baiduMap || baiduMap.status !== MapStatus.LOADED) {
+            return;
         }
+        if (changes['options'].isFirstChange() && !this.map) {
+            return;
+        }
+        let opts = changes['options'].currentValue;
+        reCenter(this.map, opts);
+        reZoom(this.map, opts);
+        redrawMarkers.bind(this)(this.map, this.previousMarkers, opts);
     }
 
-    this.ref.markForCheck();
-    this.ref.detectChanges();
-    console.log('baidu-map:',this.opts);
-  }
-  ngAfterViewInit()
-  {
-     this.timer = setInterval(() => {
-       this.points[0].new_info = !this.points[0].new_info;
-       console.log('clock:',this.opts);
-       this.ref.markForCheck();
-       this.ref.detectChanges();
-     },10000);
-  }
-  getMarks(){
-    //this.pointService.getPoints().then(points => this.points = points);
-    this.points = this.pointService.getPointsSync();
-    this.selectedPoint = this.points[1];
-    var marks = new Array();
-    for ( var i = 0; i < this.points.length;i++)
-    {
-      var iconUrl:string;
-      var iconWidth :number;
-      var iconHeigh :number;
-      if (this.points[i].new_info == true) {
-        iconUrl = 'http://api.map.baidu.com/img/markers.png';
-        iconWidth = 23;
-        iconHeigh = 25;
-      }
-      else {
-        iconUrl = 'http://api.map.baidu.com/img/markers.png';
-        iconWidth = 10;
-        iconHeigh = 23;
-      }
-      var tmp_mark = {
-        longitude : this.points[i].longitude ,
-        latitude : this.points[i].latitude ,
-        title : this.points[i].name,
-        content: this.points[i].state,
-        autoDisplayInfoWindow : false,
-        enableMessage : false,
-        icon : iconUrl,
-        width : iconWidth,
-        height : iconHeigh,
-      };
-      marks[i] = tmp_mark;
+    _draw() {
+        let options: MapOptions = Object.assign({}, defaultOpts, this.options);
+        this.map = createInstance(options, this.el.nativeElement);
+        this.onMapLoaded.emit(this);
+        redrawMarkers.bind(this)(this.map, this.previousMarkers, options);
     }
-
-    return marks;
-  }
-
 }

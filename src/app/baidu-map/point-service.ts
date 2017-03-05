@@ -9,6 +9,8 @@ export class PointService {
     }
 
     getPointsSync(): Point[] {
+        POINTS[0].new_info = !POINTS[0].new_info;
+        POINTS[1].new_info = !POINTS[1].new_info;
         return POINTS;
     }
     getPoint(id): Point{
