@@ -127,7 +127,7 @@ export class MapChartOne implements OnInit {
             console.log('clock:',this.selectedPoint);
             this.ref.markForCheck();
             this.ref.detectChanges();
-            this.map._draw();
+            this.map._redrawMarkers();
         },3000);
     }
 
