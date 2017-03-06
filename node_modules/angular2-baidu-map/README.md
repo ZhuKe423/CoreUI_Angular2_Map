@@ -51,7 +51,8 @@ export class MainApp implements OnInit {
                 latitude: 31.245554,
                 title: 'Where',
                 content: 'Put description here',
-                autoDisplayInfoWindow: true
+                autoDisplayInfoWindow: true,
+                enableDragging: true
             }],
             geolocationCtrl: {
                 anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_RIGHT
@@ -78,7 +79,7 @@ export class MainApp implements OnInit {
     }
 
     clickMarker(marker: any){
-        console.log('The clicked marker is', marker);
+        console.log('The clicked marker is', marker.getPosition());
     }
 
 }
