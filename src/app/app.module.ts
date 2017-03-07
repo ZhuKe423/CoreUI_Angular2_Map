@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app.routing';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import { BaiduMapComponent } from './baidu-map/baidu-map.component';
+import { BaiduMap } from './baidu-map/baidu-map.component';
 
 @NgModule({
   imports: [
@@ -36,7 +36,6 @@ import { BaiduMapComponent } from './baidu-map/baidu-map.component';
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
-    //BaiduMapComponent,
   ],
   providers: [{
     provide: LocationStrategy,

@@ -22,7 +22,7 @@ export const reZoom = function(map: any, opts: MapOptions) {
 export const createInstance = function(opts: MapOptions, element: any) {
     var BMap: any = (<any>window)['BMap'];
     // create map instance
-    var map = new BMap.Map(element);
+    var map = new BMap.Map(element,{enableMapClick:opts.enableMapClick});
 
     // init map, set central location and zoom level
     map.centerAndZoom(new BMap.Point(opts.center.longitude, opts.center.latitude), opts.zoom);

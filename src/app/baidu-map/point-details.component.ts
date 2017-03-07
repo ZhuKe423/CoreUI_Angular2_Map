@@ -5,9 +5,7 @@ import { Point } from './point';
     selector: 'point-details',
     template:`
         <div *ngIf="point">
-            <h2>point details:</h2>
-            <div><h3>place:{{point.name}}, state:{{point.state}}, new_info: {{point.new_info}}</h3>
-            </div>
+            <p></p><p>place:{{point.name}}, state:{{point.state}}, new_info: {{point.new_info}}</p>
         </div>
     `
 })

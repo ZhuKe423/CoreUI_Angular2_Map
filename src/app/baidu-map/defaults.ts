@@ -6,7 +6,8 @@ export const defaultOpts: MapDefaultOptions = {
     overviewCtrl: true,
     enableScrollWheelZoom: true,
     geolocationCtrl: false,
-    zoom: 10
+    zoom: 10,
+    enableMapClick:false,
 }
 
 export const defaultOfflineOpts: OfflineOptions = {
