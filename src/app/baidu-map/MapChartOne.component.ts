@@ -97,7 +97,7 @@ export class MapChartOne implements OnInit {
 
         for (var i = 0 ; i < this.points.length;i++)
         {
-            if(this.points[i].latitude  == marker.point.lat)
+            if ((this.points[i].latitude  == marker.point.lat)&&(this.points[i].longitude  == marker.point.lng))
             {
                 this.selectedPoint = this.points[i];
                 break;
