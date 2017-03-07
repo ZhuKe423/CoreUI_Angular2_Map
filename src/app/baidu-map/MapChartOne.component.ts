@@ -6,13 +6,12 @@ import { ControlAnchor } from './enum/ControlAnchor';
 import {NavigationControlType} from './enum/NavigationControlType';
 import { PointService} from './point-service';
 import { ChangeDetectorRef } from "@angular/core";
-import { redrawMarkers} from './CoreOperations';
-import { PreviousMarker } from './interfaces/PreviousMarker';
 
 @Component({
     selector: 'mapchart-one',
     template: `
-        <point-details [point]="selectedPoint"></point-details>
+        <div><p>新消息：</p><point-details [point]="pointHasNewInfor"></point-details></div>
+        <div><p>选中标签的信息：</p><point-details [point]="selectedPoint"></point-details></div>
         <baidu-map
             ak="RpbzSVUc0TKuqrfyNmk0oQoQOy7f4jGI"
             [options]="opts"
@@ -35,8 +34,9 @@ export class MapChartOne implements OnInit {
     offlineOpts:OfflineOptions;
     points:Point[];
     selectedPoint: Point;
+    pointHasNewInfor: Point;
     map:any;
-    preMarkers: PreviousMarker[] = [];
+
     private timer;
     constructor(
         private pointService: PointService,
@@ -54,7 +54,7 @@ export class MapChartOne implements OnInit {
             latitude: 30.663499
         },
         zoom: 13,
-
+        enableMapClick : false,
         // 地图上的坐标
         markers: current_marks,
         geolocationCtrl: {
@@ -92,8 +92,8 @@ export class MapChartOne implements OnInit {
         //console.log(marker.point);
         //this.selectedPoint = this.points[1];
         //this.points[0].new_info = !this.points[0].new_info;
-        let current_marks = this.getMarks();
-        this.opts.markers = current_marks;
+        //let current_marks = this.getMarks();
+        //this.opts.markers = current_marks;
 
         for (var i = 0 ; i < this.points.length;i++)
         {
@@ -107,8 +107,6 @@ export class MapChartOne implements OnInit {
         this.ref.markForCheck();
         this.ref.detectChanges();
         console.log('baidu-map:',this.opts);
-
-
     }
 
     ngAfterViewInit()
@@ -117,24 +115,24 @@ export class MapChartOne implements OnInit {
         this.timer = setInterval(() => {
             let current_marks = this.getMarks();
             this.opts.markers = current_marks;
-            if ( tmpcount <= 1){
-                this.selectedPoint = this.points[tmpcount];
-                ++tmpcount;
-            }else{
+
+            ++tmpcount;
+            if (tmpcount >= this.points.length){
                 tmpcount = 0;
             }
-
-            console.log('clock:',this.selectedPoint);
+            if (this.points[tmpcount].new_info){
+                this.pointHasNewInfor = this.points[tmpcount];
+            }
+            console.log('clock:',this.pointHasNewInfor);
             this.ref.markForCheck();
             this.ref.detectChanges();
             this.map._redrawMarkers();
-        },3000);
+        },30000);
     }
 
     getMarks(){
         //this.pointService.getPoints().then(points => this.points = points);
         this.points = this.pointService.getPointsSync();
-        this.selectedPoint = this.points[1];
         var marks = new Array();
         for ( var i = 0; i < this.points.length;i++)
         {
@@ -152,7 +150,7 @@ export class MapChartOne implements OnInit {
                 longitude : this.points[i].longitude ,
                 latitude : this.points[i].latitude ,
                 title : this.points[i].name,
-                content: this.points[i].state,
+                content: '<div><div>'+this.points[i].state+'</div><div><button type="button" class="btn btn-success btn-sm" ng-click="marker_confirm('+i+')">确定</button></div></div>',
                 autoDisplayInfoWindow : false,
                 enableMessage : false,
                 icon : iconUrl,
@@ -163,7 +161,9 @@ export class MapChartOne implements OnInit {
             };
             marks[i] = tmp_mark;
         }
-
         return marks;
+    }
+    marker_confirm(index:number){
+        alert("this.point "+index+" confirmed!");
     }
 }

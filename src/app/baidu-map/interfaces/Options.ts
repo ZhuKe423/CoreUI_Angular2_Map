@@ -28,6 +28,7 @@ export interface MapDefaultOptions {
     enableScrollWheelZoom?: boolean;
     geolocationCtrl?: boolean | GeolocationControlOptions;
     zoom?: number;
+    enableMapClick?:boolean;
 }
 
 export interface MapOptions extends MapDefaultOptions {
