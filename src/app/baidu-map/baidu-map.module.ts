@@ -8,7 +8,7 @@ import { DropdownModule } from 'ng2-bootstrap/dropdown';
 import { BaiduMap } from './baidu-map.component';
 import { BaiduMapRoutingModule } from './baidu-map-routing.module';
 import { MapChartOne } from './MapChartOne.component';
-import { PointDetails } from './point-details.component';
+import { PointDetails , SelectPointDetails } from './point-details.component';
 import { PointService } from './point-service';
 
 @NgModule({
@@ -23,6 +23,7 @@ import { PointService } from './point-service';
         BaiduMap,
         MapChartOne,
         PointDetails,
+        SelectPointDetails,
     ],
     providers: [
         PointService,

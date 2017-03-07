@@ -10,8 +10,8 @@ import { ChangeDetectorRef } from "@angular/core";
 @Component({
     selector: 'mapchart-one',
     template: `
-        <div><p>新消息：</p><point-details [point]="pointHasNewInfor"></point-details></div>
-        <div><p>选中标签的信息：</p><point-details [point]="selectedPoint"></point-details></div>
+        <div><point-details [point]="pointHasNewInfor"></point-details></div>
+        <div><select-point-details [point]="selectedPoint"></select-point-details></div>
         <baidu-map
             ak="RpbzSVUc0TKuqrfyNmk0oQoQOy7f4jGI"
             [options]="opts"
