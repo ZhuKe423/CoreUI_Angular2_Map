@@ -7,7 +7,7 @@ const routes: Routes = [
         path: '',
         component: MapChartOne,
         data: {
-            title: 'MapCharts'
+            title: '地图信息'
         }
     },
 ];
