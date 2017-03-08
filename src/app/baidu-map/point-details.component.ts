@@ -26,4 +26,8 @@ export class PointDetails {
 export class SelectPointDetails {
     @Input()
     point : Point;
+
+    onClick(){
+        console.log("SelectPointDetails_onClick");
+    }
 }
