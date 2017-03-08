@@ -9,7 +9,7 @@ import { HttpModule, JsonpModule }    from '@angular/http';
 import { BaiduMap } from './baidu-map.component';
 import { BaiduMapRoutingModule } from './baidu-map-routing.module';
 import { MapChartOne } from './MapChartOne.component';
-import { PointDetails } from './point-details.component';
+import { PointDetails , SelectPointDetails } from './point-details.component';
 import { PointService } from './point-service';
 
 @NgModule({
@@ -25,11 +25,14 @@ import { PointService } from './point-service';
     declarations: [
         BaiduMap,
         MapChartOne,
-        PointDetails
+        PointDetails,
+        SelectPointDetails
     ],
     exports: [
       MapChartOne,
       PointDetails
+      PointDetails,
+      SelectPointDetails
     ],
     providers: [
         PointService,
