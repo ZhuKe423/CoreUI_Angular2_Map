@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output,EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import {  OfflineOptions,MapOptions } from './interfaces/Options';
 import { Point } from './point';
@@ -7,11 +7,10 @@ import {NavigationControlType} from './enum/NavigationControlType';
 import { PointService} from './point-service';
 import { ChangeDetectorRef } from "@angular/core";
 
+
 @Component({
     selector: 'mapchart-one',
     template: `
-        <div><point-details [point]="pointHasNewInfor"></point-details></div>
-        <div><select-point-details [point]="selectedPoint"></select-point-details></div>
         <baidu-map
             ak="RpbzSVUc0TKuqrfyNmk0oQoQOy7f4jGI"
             [options]="opts"
@@ -30,6 +29,10 @@ import { ChangeDetectorRef } from "@angular/core";
 })
 
 export class MapChartOne implements OnInit {
+    @Output() onMarkerClicked = new EventEmitter();
+    @Output() pointStatusUpdate = new EventEmitter();
+    @Output() onMapLoaded = new EventEmitter();
+
     opts:MapOptions;
     offlineOpts:OfflineOptions;
     points:Point[];
@@ -103,10 +106,10 @@ export class MapChartOne implements OnInit {
                 break;
             }
         }
+        this.onMarkerClicked.emit(this.selectedPoint);
 
         this.ref.markForCheck();
         this.ref.detectChanges();
-        console.log('baidu-map:',this.opts);
     }
 
     ngAfterViewInit()
@@ -122,45 +125,51 @@ export class MapChartOne implements OnInit {
             }
             if (this.points[tmpcount].new_info){
                 this.pointHasNewInfor = this.points[tmpcount];
+                this.pointStatusUpdate.emit(this.pointHasNewInfor); //Emit event
+                this.ref.markForCheck();
+                this.ref.detectChanges();
+                console.log('tmpcount: ',tmpcount);
+                console.log('clock: ',this.pointHasNewInfor);
+                //this.map._redrawMarkers();
             }
-            console.log('clock:',this.pointHasNewInfor);
-            this.ref.markForCheck();
-            this.ref.detectChanges();
-            this.map._redrawMarkers();
-        },30000);
+        }, 30000);
     }
 
     getMarks(){
-        //this.pointService.getPoints().then(points => this.points = points);
-        this.points = this.pointService.getPointsSync();
-        var marks = new Array();
-        for ( var i = 0; i < this.points.length;i++)
-        {
-            var iconUrl:string = 'http://api.map.baidu.com/img/markers.png';
-            var iconWidth :number = 23;
-            var iconHeigh :number = 25;
-            var offset_x :number = 0;
-            var offset_y :number = 0 - 11*25;
-            if (this.points[i].new_info == false) {
-                offset_x = 0;
-                offset_y = 0- 10*25;
-            }
+        let marks = new Array();
+        //this.points = this.pointService.getPointsSync();
 
-            var tmp_mark = {
-                longitude : this.points[i].longitude ,
-                latitude : this.points[i].latitude ,
-                title : this.points[i].name,
-                content: '<div><div>'+this.points[i].state+'</div><div></div></div>',
-                autoDisplayInfoWindow : false,
-                enableMessage : false,
-                icon : iconUrl,
-                width : iconWidth,
-                height : iconHeigh,
-                offset_x: offset_x,
-                offset_y: offset_y,
-            };
-            marks[i] = tmp_mark;
-        }
+        this.pointService.getPoints().then(points => {
+            this.points = points;
+            for ( let i = 0; i < this.points.length;i++) { // Shall be put in here, as this.points can be only get after then call.
+                let iconUrl:string = 'http://api.map.baidu.com/img/markers.png';
+                let iconWidth :number = 23;
+                let iconHeigh :number = 25;
+                let offset_x :number = 0;
+                let offset_y :number = 0 - 11*25;
+                if (this.points[i].new_info == false) {
+                    offset_x = 0;
+                    offset_y = 0- 10*25;
+                }
+
+                let tmp_mark = {
+                    longitude : this.points[i].longitude ,
+                    latitude : this.points[i].latitude ,
+                    title : this.points[i].name,
+                    content: '<div><div>'+this.points[i].state+'</div><div><button type="button" class="btn btn-success btn-sm" ng-click="marker_confirm('+i+')">确定</button></div></div>',
+                    autoDisplayInfoWindow : false,
+                    enableMessage : false,
+                    icon : iconUrl,
+                    width : iconWidth,
+                    height : iconHeigh,
+                    offset_x: offset_x,
+                    offset_y: offset_y,
+                };
+                marks[i] = tmp_mark;
+            }
+            console.log('Promised value is: ', this.points);
+        });
+
         return marks;
     }
     marker_confirm(index:number){
