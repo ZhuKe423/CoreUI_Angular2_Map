@@ -30,7 +30,6 @@ import { PointService } from './point-service';
     ],
     exports: [
       MapChartOne,
-      PointDetails
       PointDetails,
       SelectPointDetails
     ],
