@@ -1,7 +1,9 @@
 import { Injectable, EventEmitter} from '@angular/core';
 import { Http, Jsonp, Headers, URLSearchParams } from '@angular/http';
 import { Point } from './point';
+import { InspectionRecord } from './inspectionRecord';
 import { POINTS } from './mock-points';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -21,6 +23,16 @@ export class PointService {
             .toPromise()
             .then(response => response.json() as Point[])
             .catch(this.handleError);
+    }
+
+    getInspectionRecord(cpid: number): Promise<InspectionRecord[]> {
+    let params = new URLSearchParams();
+    params.set('action', 'rawrecord');
+    if (cpid) params.set('cpid', cpid.toString());
+    return this.http.get(this.checkpointsUrl, {search: params/*, header: this.headers*/})
+        .toPromise()
+        .then(response => response.json() as InspectionRecord[])
+        .catch(this.handleError);
     }
 
     getPointsSync(): Point[] {

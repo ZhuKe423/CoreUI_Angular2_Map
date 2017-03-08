@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, } from '@angular/core';
 import { Point } from '../baidu-map/point';
+import { InspectionRecord } from '../baidu-map/inspectionRecord'
 import { MapChartOne} from '../baidu-map/MapChartOne.component';
 import { PointService } from '../baidu-map/point-service';
 import { Router } from '@angular/router';
@@ -10,8 +11,10 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   constructor(
-      private ref:ChangeDetectorRef
+      private ref:ChangeDetectorRef,
+
   ) { }
+  public rawInspectionRecord: InspectionRecord[];
   public pointHasNewInfor: Point;
   public selectedPoint: Point;
 
@@ -486,6 +489,13 @@ export class DashboardComponent implements OnInit {
   public MarkerStatusUpdate (point: Point) {
     this.pointHasNewInfor = point;
     console.log('The point status changed: ', this.pointHasNewInfor);
+    this.ref.markForCheck();
+    this.ref.detectChanges();
+  }
+
+  public updatedInspectionRecord (rawInspectionRecord: InspectionRecord[]) {
+    this.rawInspectionRecord = rawInspectionRecord;
+    console.log('The updated insepction records: ', this.rawInspectionRecord);
     this.ref.markForCheck();
     this.ref.detectChanges();
   }

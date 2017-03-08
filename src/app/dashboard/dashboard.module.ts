@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from "@angular/http";
+import { CommonModule} from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
@@ -17,7 +19,9 @@ import { PointService} from '../baidu-map/point-service'
     DropdownModule,
     BaiduMapModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    //BrowserModule,
+    CommonModule
   ],
   declarations: [ DashboardComponent ],
   providers: [

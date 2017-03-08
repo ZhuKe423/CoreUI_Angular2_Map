@@ -2,6 +2,7 @@ import { Component, OnInit, Output,EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import {  OfflineOptions,MapOptions } from './interfaces/Options';
 import { Point } from './point';
+import { InspectionRecord } from './inspectionRecord';
 import { ControlAnchor } from './enum/ControlAnchor';
 import {NavigationControlType} from './enum/NavigationControlType';
 import { PointService} from './point-service';
@@ -31,11 +32,12 @@ import { ChangeDetectorRef } from "@angular/core";
 export class MapChartOne implements OnInit {
     @Output() onMarkerClicked = new EventEmitter();
     @Output() pointStatusUpdate = new EventEmitter();
-    @Output() onMapLoaded = new EventEmitter();
+    @Output() rawRecordArive = new EventEmitter();
 
     opts:MapOptions;
     offlineOpts:OfflineOptions;
     points:Point[];
+    rawInspectionRecords: InspectionRecord[];
     selectedPoint: Point;
     pointHasNewInfor: Point;
     map:any;
@@ -116,6 +118,10 @@ export class MapChartOne implements OnInit {
     {
         var tmpcount = 0;
         this.timer = setInterval(() => {
+            this.pointService.getInspectionRecord(0)
+                .then(rawInspectionRecord => {this.rawInspectionRecords = rawInspectionRecord});
+            this.rawRecordArive.emit(this.rawInspectionRecords); //Emit event
+
             let current_marks = this.getMarks();
             this.opts.markers = current_marks;
 
