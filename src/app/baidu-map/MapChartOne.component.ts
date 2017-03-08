@@ -172,7 +172,5 @@ export class MapChartOne implements OnInit {
 
         return marks;
     }
-    marker_confirm(index:number){
-        alert("this.point "+index+" confirmed!");
-    }
+
 }

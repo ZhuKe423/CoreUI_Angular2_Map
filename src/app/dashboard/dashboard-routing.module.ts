@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     data: {
-      title: 'Dashboard'
+      title: '巡检系统总览'
     }
   }
 ];
