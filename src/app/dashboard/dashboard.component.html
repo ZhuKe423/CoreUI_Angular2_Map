@@ -35,19 +35,14 @@
           <button type="button" class="btn btn-transparent p-0 float-right">
             <i class="icon-location-pin"></i>
           </button>
-          <h4 class="mb-0">9.823</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">当前巡检点</h4>
+          <p>以下巡检点有报告提交</p>
         </div>
         <div class="chart-wrapper px-1" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart2Data"
-          [labels]="lineChart2Labels"
-          [options]="lineChart2Options"
-          [colors]="lineChart2Colours"
-          [legend]="lineChart2Legend"
-          [chartType]="lineChart2Type"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
+          <div>
+            <point-details [point]="pointHasNewInfor"></point-details>
+            <!--point-details (point) = pointHasNewInfor($event)></point-details>-->
+          </div>
         </div>
       </div>
     </div><!--/.col-->
@@ -57,13 +52,13 @@
           <button type="button" class="btn btn-transparent p-0 float-right">
             <i class="icon-location-pin"></i>
           </button>
-          <div><p>新消息：</p>
-            <point-details [point]="pointHasNewInfor"></point-details>
-            <!--point-details (point) = pointHasNewInfor($event)></point-details>-->
-          </div>
-          <div><p>选中标签的信息：</p>
-            <select-point-details [point]="selectedPoint"></select-point-details>
-            <!--<point-details (point)= selectedPoint($event)></point-details>-->
+          <div>
+            <h4 class="mb-0">选中巡检点</h4>
+            <!--<p>详情：</p>-->
+            <div class="chart-wrapper px-1" <!--style="height:70px;"-->>
+              <select-point-details [point]="selectedPoint"></select-point-details>
+              <!--<point-details (point)= selectedPoint($event)></point-details>-->
+            </div>
           </div>
 
         </div>
