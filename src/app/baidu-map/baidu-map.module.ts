@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
+import { HttpModule, JsonpModule }    from '@angular/http';
 
 import { BaiduMap } from './baidu-map.component';
 import { BaiduMapRoutingModule } from './baidu-map-routing.module';
@@ -18,11 +19,17 @@ import { PointService } from './point-service';
         DropdownModule,
         FormsModule,
         CommonModule,
+        HttpModule,
+        JsonpModule,
     ],
     declarations: [
         BaiduMap,
         MapChartOne,
-        PointDetails,
+        PointDetails
+    ],
+    exports: [
+      MapChartOne,
+      PointDetails
     ],
     providers: [
         PointService,

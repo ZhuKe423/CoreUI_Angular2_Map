@@ -13,8 +13,8 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-          <h4 class="mb-0">9.823</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">46名</h4>
+          <p>巡检员巡检中</p>
         </div>
         <div class="chart-wrapper px-1" style="height:70px;">
           <canvas baseChart class="chart"
@@ -51,7 +51,28 @@
         </div>
       </div>
     </div><!--/.col-->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-6">
+      <div class="card card-inverse card-warning">
+        <div class="card-block pb-0">
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="icon-location-pin"></i>
+          </button>
+          <div><p>新消息：</p>
+            <point-details [point]="pointHasNewInfor"></point-details>
+            <!--point-details (point) = pointHasNewInfor($event)></point-details>-->
+          </div>
+          <div><p>选中标签的信息：</p>
+            <point-details [point]="selectedPoint"></point-details>
+            <!--<point-details (point)= selectedPoint($event)></point-details>-->
+          </div>
+
+        </div>
+        <!--<div class="chart-wrapper px-1" style="height:70px;">
+
+        </div>-->
+      </div>
+    </div>
+    <!--<div class="col-sm-6 col-lg-3">
       <div class="card card-inverse card-warning">
         <div class="card-block pb-0">
           <div class="btn-group float-right">
@@ -79,7 +100,7 @@
           (chartClick)="chartClicked($event)"></canvas>
         </div>
       </div>
-    </div><!--/.col-->
+    </div>&lt;!&ndash;/.col&ndash;&gt;
     <div class="col-sm-6 col-lg-3">
       <div class="card card-inverse card-danger">
         <div class="card-block pb-0">
@@ -108,14 +129,14 @@
           (chartClick)="chartClicked($event)"></canvas>
         </div>
       </div>
-    </div><!--/.col-->
+    </div>&lt;!&ndash;/.col&ndash;&gt;-->
   </div><!--/.row-->
   <div class="card">
     <div class="card-block">
       <div class="row">
         <div class="col-sm-5">
-          <h4 class="card-title mb-0">Traffic</h4>
-          <div class="small text-muted">November 2015</div>
+          <h4 class="card-title mb-0">成都地铁一号线巡检动态图</h4>
+          <div class="small text-muted">2017年3月10日</div>
         </div><!--/.col-->
         <div class="col-sm-7 hidden-sm-down">
           <button type="button" class="btn btn-primary float-right"><i class="icon-cloud-download"></i></button>
@@ -134,16 +155,8 @@
           </div>
         </div><!--/.col-->
       </div><!--/.row-->
-      <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-        <canvas baseChart class="chart"
-        [datasets]="mainChartData"
-        [labels]="mainChartLabels"
-        [options]="mainChartOptions"
-        [colors]="mainChartColours"
-        [legend]="mainChartLegend"
-        [chartType]="mainChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>
+      <div class="chart-wrapper" style="margin-top:20px;">
+        <mapchart-one (onMarkerClicked)="MarkerClick($event)" (pointStatusUpdate)="MarkerStatusUpdate($event)"></mapchart-one>
       </div>
     </div>
     <div class="card-footer">
@@ -187,7 +200,7 @@
     </div>
   </div>
   <!--/.card-->
-  <div class="row">
+  <!--<div class="row">
     <div class="col-sm-6 col-lg-3">
       <div class="social-box facebook">
         <i class="fa fa-facebook"></i>
@@ -213,8 +226,8 @@
           </li>
         </ul>
       </div>
-      <!--/.social-box-->
-    </div><!--/.col-->
+      &lt;!&ndash;/.social-box&ndash;&gt;
+    </div>&lt;!&ndash;/.col&ndash;&gt;
     <div class="col-sm-6 col-lg-3">
       <div class="social-box twitter">
         <i class="fa fa-twitter"></i>
@@ -240,8 +253,8 @@
           </li>
         </ul>
       </div>
-      <!--/.social-box-->
-    </div><!--/.col-->
+      &lt;!&ndash;/.social-box&ndash;&gt;
+    </div>&lt;!&ndash;/.col&ndash;&gt;
     <div class="col-sm-6 col-lg-3">
       <div class="social-box linkedin">
         <i class="fa fa-linkedin"></i>
@@ -267,8 +280,8 @@
           </li>
         </ul>
       </div>
-      <!--/.social-box-->
-    </div><!--/.col-->
+      &lt;!&ndash;/.social-box&ndash;&gt;
+    </div>&lt;!&ndash;/.col&ndash;&gt;
     <div class="col-sm-6 col-lg-3">
       <div class="social-box google-plus">
         <i class="fa fa-google-plus"></i>
@@ -294,9 +307,9 @@
           </li>
         </ul>
       </div>
-      <!--/.social-box-->
-    </div><!--/.col-->
-  </div><!--/.row-->
+      &lt;!&ndash;/.social-box&ndash;&gt;
+    </div>&lt;!&ndash;/.col&ndash;&gt;
+  </div>--><!--/.row-->
   <div class="row">
     <div class="col-md-12">
       <div class="card">

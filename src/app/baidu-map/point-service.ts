@@ -1,11 +1,26 @@
 import { Injectable, EventEmitter} from '@angular/core';
+import { Http, Jsonp, Headers, URLSearchParams } from '@angular/http';
 import { Point } from './point';
 import { POINTS } from './mock-points';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class PointService {
+    private headers = new Headers({'Just_Test': 'application/json'});
+    private checkpointsUrl = 'http://api.jzk12.com/index/inspection/api';  // URL to web api
+    constructor(
+        private  http: Http,
+        private jsonp: Jsonp) { }
+
+
+
     getPoints(): Promise<Point[]> {
-        return Promise.resolve(POINTS);
+        let params = new URLSearchParams();
+        params.set('action', 'checkpoints');
+        return this.http.get(this.checkpointsUrl, {search: params/*, header: this.headers*/})
+            .toPromise()
+            .then(response => response.json() as Point[])
+            .catch(this.handleError);
     }
 
     getPointsSync(): Point[] {
@@ -21,5 +36,10 @@ export class PointService {
             if(points[i].id == id)
                 return points[i];
         }
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
     }
 }
