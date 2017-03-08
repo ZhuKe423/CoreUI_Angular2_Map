@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Point } from '../baidu-map/point';
+import { MapChartOne} from '../baidu-map/MapChartOne.component';
+import { PointService } from '../baidu-map/point-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  // constructor( ) { }
+  constructor(
+      private ref:ChangeDetectorRef
+  ) { }
+  public pointHasNewInfor: Point;
+  public selectedPoint: Point;
 
   public brandPrimary: string =  '#20a8d8';
   public brandSuccess: string =  '#4dbd74';
@@ -467,5 +474,19 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+  }
+
+  public MarkerClick(point: Point) {
+    this.selectedPoint = point;
+    console.log('The point clicked: ', this.selectedPoint);
+    this.ref.markForCheck();
+    this.ref.detectChanges();
+  }
+
+  public MarkerStatusUpdate (point: Point) {
+    this.pointHasNewInfor = point;
+    console.log('The point status changed: ', this.pointHasNewInfor);
+    this.ref.markForCheck();
+    this.ref.detectChanges();
   }
 }
