@@ -10,11 +10,14 @@ export const loader = function(ak: string, offlineOpts: OfflineOptions, callback
 
     let baiduMap: MapObjct = win['baiduMap'];
     if (baiduMap && baiduMap.status === MapStatus.LOADING) {
+        console.log("Map Loading");
         return baiduMap.callbacks.push(callback);
     }
 
     if (baiduMap && baiduMap.status === MapStatus.LOADED) {
-        return callback();
+        console.log("Map Loaded");
+        baiduMap.callbacks.push(callback);
+        //return callback();
     }
 
     win['baiduMap'] = { status: MapStatus.LOADING, callbacks: [] };

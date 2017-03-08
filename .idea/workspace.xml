@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3a8d7a9b-665e-47e2-bce7-af419fe0406c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/baidu-map/Loader.ts" afterPath="$PROJECT_DIR$/src/app/baidu-map/Loader.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/baidu-map/MapChartOne.component.ts" afterPath="$PROJECT_DIR$/src/app/baidu-map/MapChartOne.component.ts" />
     </list>
     <ignored path="Angular2_CLI_Full_Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,16 +28,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MapChartOne.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="point-details.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/baidu-map/point-details.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+                <marker date="1488953943713" expanded="true" signature="168:400" ph="..." />
+                <marker date="1488953943713" expanded="true" signature="566:737" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapChartOne.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/baidu-map/MapChartOne.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+            <state relative-caret-position="247">
+              <caret line="13" column="15" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
               <folding>
                 <element signature="e#0#70#0" expanded="true" />
-                <marker date="1488956638278" expanded="true" signature="567:799" ph="..." />
-                <marker date="1488956638278" expanded="true" signature="850:941" ph="{...}" />
+                <marker date="1488957646759" expanded="true" signature="567:799" ph="..." />
+                <marker date="1488957646759" expanded="true" signature="850:941" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loader.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/baidu-map/Loader.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,14 +76,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.html">
+      <file leaf-file-name="baidu-map.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/baidu-map/baidu-map.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state relative-caret-position="1303">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding>
-                <marker date="1488956638216" expanded="true" signature="36678:36699" ph="..." />
-                <marker date="1488956638216" expanded="true" signature="36678:36718" ph="..." />
+                <marker date="1488718857820" expanded="true" signature="631:853" ph="{...}" />
+                <marker date="1488718857820" expanded="true" signature="884:924" ph="{...}" />
+                <marker date="1488718857820" expanded="true" signature="982:1064" ph="..." />
               </folding>
             </state>
           </provider>
@@ -79,6 +106,18 @@
             <state relative-caret-position="127">
               <caret line="11" column="20" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="20" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CoreOperations.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/baidu-map/CoreOperations.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,6 +161,7 @@
         <option value="$PROJECT_DIR$/src/app/dashboard/dashboard.component.html" />
         <option value="$PROJECT_DIR$/src/app/dashboard/dashboard-routing.module.ts" />
         <option value="$PROJECT_DIR$/src/app/baidu-map/MapChartOne.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/baidu-map/Loader.ts" />
       </list>
     </option>
   </component>
@@ -334,7 +374,7 @@
       <workItem from="1488718673610" duration="971000" />
       <workItem from="1488768054901" duration="8050000" />
       <workItem from="1488860971286" duration="8018000" />
-      <workItem from="1488953363610" duration="2947000" />
+      <workItem from="1488953363610" duration="4176000" />
     </task>
     <task id="LOCAL-00001" summary="update 0307">
       <created>1488861005019</created>
@@ -357,15 +397,22 @@
       <option name="project" value="LOCAL" />
       <updated>1488953904448</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="更新页面显示 dashbrod和mapchartOne">
+      <created>1488957150489</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1488957150489</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107512000" />
+    <option name="totallyTimeSpent" value="108741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1040" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2805526" sideWeight="0.495671" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -438,7 +485,8 @@
     <MESSAGE value="update 0307" />
     <MESSAGE value="update 0307-1" />
     <MESSAGE value="更新页面显示 dashbrod和mapchartOne" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新页面显示 dashbrod和mapchartOne" />
+    <MESSAGE value="fix baiduMap loading issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix baiduMap loading issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -564,23 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/Loader.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/enum/MapStatus.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/baidu-map/enum/ControlAnchor.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -655,16 +686,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/CoreOperations.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
@@ -700,7 +721,7 @@
         <state relative-caret-position="475">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#0#56#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -717,31 +738,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/point-details.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/baidu-map.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1216">
-          <caret line="73" column="8" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="36" />
-          <folding>
-            <marker date="1488718857820" expanded="true" signature="631:853" ph="{...}" />
-            <marker date="1488718857820" expanded="true" signature="884:924" ph="{...}" />
-            <marker date="1488718857820" expanded="true" signature="982:1064" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,7 +747,7 @@
         <state relative-caret-position="171">
           <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -771,14 +768,6 @@
             <marker date="1488956638216" expanded="true" signature="36678:36699" ph="..." />
             <marker date="1488956638216" expanded="true" signature="36678:36718" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -806,15 +795,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/baidu-map.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1303">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding>
+            <marker date="1488718857820" expanded="true" signature="631:853" ph="{...}" />
+            <marker date="1488718857820" expanded="true" signature="884:924" ph="{...}" />
+            <marker date="1488718857820" expanded="true" signature="982:1064" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/point-details.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+            <marker date="1488953943713" expanded="true" signature="168:400" ph="..." />
+            <marker date="1488953943713" expanded="true" signature="566:737" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/baidu-map/MapChartOne.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+        <state relative-caret-position="247">
+          <caret line="13" column="15" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
           <folding>
             <element signature="e#0#70#0" expanded="true" />
-            <marker date="1488956638278" expanded="true" signature="567:799" ph="..." />
-            <marker date="1488956638278" expanded="true" signature="850:941" ph="{...}" />
+            <marker date="1488957646759" expanded="true" signature="567:799" ph="..." />
+            <marker date="1488957646759" expanded="true" signature="850:941" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/CoreOperations.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/enum/MapStatus.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/baidu-map/Loader.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -136,7 +136,7 @@ export class MapChartOne implements OnInit {
                 this.ref.detectChanges();
                 console.log('tmpcount: ',tmpcount);
                 console.log('clock: ',this.pointHasNewInfor);
-                //this.map._redrawMarkers();
+                this.map._redrawMarkers();
             }
         }, 30000);
     }
@@ -162,7 +162,7 @@ export class MapChartOne implements OnInit {
                     longitude : this.points[i].longitude ,
                     latitude : this.points[i].latitude ,
                     title : this.points[i].name,
-                    content: '<div><div>'+this.points[i].state+'</div><div><button type="button" class="btn btn-success btn-sm" ng-click="marker_confirm('+i+')">确定</button></div></div>',
+                    content: '<div>'+this.points[i].state+'</div>',
                     autoDisplayInfoWindow : false,
                     enableMessage : false,
                     icon : iconUrl,
