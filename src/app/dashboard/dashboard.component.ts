@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, } from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Point } from '../baidu-map/point';
 import { InspectionRecord } from '../baidu-map/inspectionRecord'
 import { MapChartOne} from '../baidu-map/MapChartOne.component';
@@ -6,13 +7,13 @@ import { PointService } from '../baidu-map/point-service';
 import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
 
   constructor(
       private ref:ChangeDetectorRef,
-
+      private modalService: NgbModal,
   ) { }
   public rawInspectionRecord: InspectionRecord[];
   public pointHasNewInfor: Point;
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   public brandInfo: string =   '#63c2de';
   public brandWarning: string =  '#f8cb00';
   public brandDanger: string =   '#f86c6b';
-
+  closeResult: string;
+  photoUrl:string;
   // dropdown buttons
   public status: { isopen: boolean } = { isopen: false };
   public toggleDropdown($event: MouseEvent): void {
@@ -32,6 +34,24 @@ export class DashboardComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
+  photo_open(content,event){
+    console.log("photo_open:",event.srcElement.currentSrc);
+    this.photoUrl = event.srcElement.currentSrc;
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
   // convert Hex to RGBA
   public convertHex(hex: string, opacity: number) {
     hex = hex.replace('#', '');

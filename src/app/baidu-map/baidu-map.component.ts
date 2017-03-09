@@ -76,6 +76,7 @@ export class BaiduMap implements OnInit, OnChanges {
     }
     _redrawMarkers(){
         let options: MapOptions = Object.assign({}, defaultOpts, this.options);
+        console.log("redrawMarkers:",options);
         redrawMarkers.bind(this)(this.map, this.previousMarkers, options);
     }
 }

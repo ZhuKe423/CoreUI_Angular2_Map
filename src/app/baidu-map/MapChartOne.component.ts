@@ -123,7 +123,10 @@ export class MapChartOne implements OnInit {
             this.rawRecordArive.emit(this.rawInspectionRecords); //Emit event
 
             let current_marks = this.getMarks();
+
             this.opts.markers = current_marks;
+            console.log('markers value is: ', this.opts.markers);
+            this.map._redrawMarkers();
 
             ++tmpcount;
             if (tmpcount >= this.points.length){
@@ -134,11 +137,10 @@ export class MapChartOne implements OnInit {
                 this.pointStatusUpdate.emit(this.pointHasNewInfor); //Emit event
                 this.ref.markForCheck();
                 this.ref.detectChanges();
-                console.log('tmpcount: ',tmpcount);
-                console.log('clock: ',this.pointHasNewInfor);
-                this.map._redrawMarkers();
+                //console.log('tmpcount: ',tmpcount);
+                //console.log('clock: ',this.pointHasNewInfor);
             }
-        }, 30000);
+        }, 5000);
     }
 
     getMarks(){
@@ -173,7 +175,7 @@ export class MapChartOne implements OnInit {
                 };
                 marks[i] = tmp_mark;
             }
-            console.log('Promised value is: ', this.points);
+            //console.log('Promised value is: ', this.points);
         });
 
         return marks;

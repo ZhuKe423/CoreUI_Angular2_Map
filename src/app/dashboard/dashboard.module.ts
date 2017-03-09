@@ -11,6 +11,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { BaiduMapModule} from '../baidu-map/baidu-map.module';
 import { MapChartOne} from '../baidu-map/MapChartOne.component';
 import { PointService} from '../baidu-map/point-service'
+import {NgbModal,NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -21,11 +22,13 @@ import { PointService} from '../baidu-map/point-service'
     HttpModule,
     JsonpModule,
     //BrowserModule,
-    CommonModule
+    CommonModule,
+    NgbModule.forRoot(),
   ],
   declarations: [ DashboardComponent ],
   providers: [
     PointService,
+    NgbModal,
   ],
 
 })

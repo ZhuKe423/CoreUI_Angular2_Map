@@ -16,7 +16,6 @@ export const loader = function(ak: string, offlineOpts: OfflineOptions, callback
 
     if (baiduMap && baiduMap.status === MapStatus.LOADED) {
         console.log("Map Loaded");
-        baiduMap.callbacks.push(callback);
         //return callback();
     }
 
